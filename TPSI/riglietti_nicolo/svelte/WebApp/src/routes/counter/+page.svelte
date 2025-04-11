@@ -1,69 +1,54 @@
-<svelte:head> 
-<link href="https://fonts.googleapis.com/css2? 
-family-Material+Symbols+Dutlined:opsz,wght, FILL, GRAD@48,400,0,0" rel="stylesheet" /> 
-<link href="https://fonts.googleapis.com/css?family=Bungee+Spice&display=swap"
-rel="stylesheet"> 
-</svelte:head> 
 
 <script>
-    let counter = 0;
+    import Counter from "$lib/components/counter.svelte";
+    import DoubleCounter from "$lib/components/double_counter.svelte";
+    // let contatore = 0;
+    let contatore2 = 0;
+    let numeri = [1, 7, 2, 6, 9, 10]
+    let sottolineato = true
+
+    $: doppio = contatore2 * 2
+    $: sottolineato = contatore2 % 2 == 0 
+
+
+    function gestisci_evento(evento) {
+        alert(`${evento.detail.tipo} -- ${evento.detail.valore}`)
+    }
 </script>
 
-<h1>Pagina Counter!!!</h1>
+<!-- <h1>Pagina Counter!!!</h1>
+<h2>Il valore del contatore vale {contatore}</h2>
 
-<div class="container">
-    <div class="pulsante">
-        <button on:click={() => counter--}>
-            <span class="material-symbols-outlined icon">-</span>
-        </button>
-    </div>
+<Counter bind:counter={contatore} /> 
+ -->
 
-    <div class="number">
-        {counter}
-    </div>
 
-    <div class="pulsante">
-        <button on:click={() => counter++}>
-            <span class="material-symbols-outlined icon">+</span>
-        </button>
-    </div>   
-</div>
+<h1>Double Counter</h1>
 
-<style>    
-    .container { 
-        border: 4px solid #043C2F; 
-        display: flex; 
-        justify-content: space-between; 
-        border-radius: 30px; 
-        width: 300px; 
-        padding: 10px; 
-    }
-    .pulsante { 
-        display: flex; 
-        align-items: center; 
-    } 
+<!-- {#if contatore2 < 5}
+    <h2 class="rosso", cla>Il valore del contatore vale {contatore2}</h2>
+{:else}
+    <h2 class="verde">Il valore del contatore vale {contatore2}</h2>
+{/if} -->
 
-    button { 
-        border: none; 
-        background: none; 
-    } 
-    .icon { 
-        font-size: 2.5rem; 
-        color: #F89C00;
-        font-weight: bolder; 
-    } 
-    .icon:hover { 
-        color: #04302F;
-        cursor: pointer; 
-    } 
+<!-- <h2 class={contatore2 < 5 ? 'rosso' : 'verde'}>Il valore del contatore vale {contatore2}</h2> -->
 
-    .icon:active { 
-        text-shadow: 1px 1px 10px #043C2F; 
-    } 
+<h2 class:sottolineato>Il valore del contatore vale {contatore2}</h2>
+<h2>il suo doppio è {doppio}</h2>
+<DoubleCounter bind:counter={contatore2} on:contatore={gestisci_evento}/>
 
-    .number {
-        font-size: 4rem; 
-        font-family: 'Bungee Spice', cursive; 
-    } 
 
+
+
+<ul>
+    {#each numeri as numero, indice}
+        <li>numeri[{indice}]: {numero}</li>
+    {/each}
+    
+</ul>
+
+<style>
+    /* .rosso {color: red;}
+    .verde {color: green;} */
+    .sottolineato { text-decoration: underline; }
 </style>

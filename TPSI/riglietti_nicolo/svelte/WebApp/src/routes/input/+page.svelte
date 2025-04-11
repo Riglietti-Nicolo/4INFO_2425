@@ -6,7 +6,7 @@
 
 Nome <input bind:value={nome}>
 Cognome <input bind:value={cognome}>
-Età <input bind:value={eta}>
+Età <input type="number" bind:value={eta}>
 
 <br><br>
 
